@@ -1,16 +1,27 @@
 'use strict';
 
-Module.register("ScaleIoT", {
+Module.register("MMM-ScaleIoT", {
 
   result: {},
   defaults: {
     updateInterval: 600000,
-    url: ''
+    url: '',
+    fadeSpeed: 500
   },
 
   start: function() {
     this.getStats();
     this.scheduleUpdate();
+  },
+
+  isEmpty: function(obj) {
+    for(var key in obj) {
+      if(obj.hasOwnProperty(key)) {
+        return false;
+      }
+    }
+    
+    return true;
   },
 
   getDom: function() {
@@ -20,11 +31,10 @@ Module.register("ScaleIoT", {
     var data = this.result;
     var statElement =  document.createElement("header");
     var title = "ScaleIoT";
-
-    if (data) {
-      console.log(JSON.stringify(data));
-      statElement.innerHTML = title;
-      wrapper.appendChild(statElement);
+    statElement.innerHTML = title;
+    wrapper.appendChild(statElement);
+      
+    if (data && !this.isEmpty(data)) {
       var tableElement = document.createElement("table");
 
       var averageWeight = data.averageWeight;
@@ -48,7 +58,12 @@ Module.register("ScaleIoT", {
       tableElement.appendChild(highRow);
 
       wrapper.appendChild(tableElement);
+    } else {
+      var error = document.createElement("span");
+      error.innerHTML = "Error fetching stats.";
+      wrapper.appendChild(error);
     }
+    
     return wrapper;
   },
 
@@ -71,6 +86,7 @@ Module.register("ScaleIoT", {
   socketNotificationReceived: function(notification, payload) {
     if (notification === "STATS_RESULT") {
       this.result = payload;
+      console.log("fade: " + self.config.fadeSpeed);
       this.updateDom(self.config.fadeSpeed);
     }
   },

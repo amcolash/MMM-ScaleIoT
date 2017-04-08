@@ -6,7 +6,7 @@ module.exports = NodeHelper.create({
     console.log('scaleiot helper started...');
   },
 
-  getTickers: function (url) {
+  getStats: function (url) {
       var self = this;
 
       request({ url: url, method: 'GET' }, function (error, response, body) {
@@ -21,7 +21,7 @@ module.exports = NodeHelper.create({
   //Subclass socketNotificationReceived received.
   socketNotificationReceived: function(notification, payload) {
     if (notification === 'GET_STATS') {
-      this.getTickers(payload);
+      this.getStats(payload);
     }
   }
 
