@@ -13,9 +13,14 @@ modules: [
 		module: 'MMM-ScaleIoT',
 		position: 'bottom_bar',
 		config: {
-			url: ,
+			url: 'http://your.server.here',
 			updateInterval: 60000 // update interval in milliseconds
 		}
 	}
 ]
 ```
+
+| Option               | Description
+| -------------------- | -----------
+| `updateInterval`     | The time between updates (In milliseconds). / <br><br> **Default value:** `300000 (5 minutes)`
+| `url`                | The url of the ScaleIoT web server. <br><br> **Default value:** `REQUIRED`
