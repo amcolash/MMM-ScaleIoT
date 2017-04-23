@@ -1,7 +1,7 @@
 # MMM-ScaleIoT
 A MagicMirror module for a [ScaleIoT]() server.
 
-This code is partially copied from the very simple [stock ticker](https://github.com/alexyak/stocks) from _alexyak_.
+This code is partially copied from the very simple [stock ticker](https://github.com/alexyak/stocks) from _@alexyak_.
 
 
 ## Configuration
